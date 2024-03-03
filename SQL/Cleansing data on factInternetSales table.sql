@@ -1,0 +1,30 @@
+--Cleansing data on factInternetSales table
+
+SELECT [ProductKey]
+      ,[OrderDateKey]
+      ,[DueDateKey]
+      ,[ShipDateKey]
+      ,[CustomerKey]
+      --,[PromotionKey]
+      --,[CurrencyKey]
+      --,[SalesTerritoryKey]
+      ,SalesOrderNumber as [Sales order Number]
+     -- ,[SalesOrderLineNumber]
+      --,[RevisionNumber]
+      --,[OrderQuantity]
+      --,[ExtendedAmount]
+      --,[UnitPriceDiscountPct]
+      --,[DiscountAmount]
+      --,[ProductStandardCost]
+      --,[TotalProductCost]
+      ,SalesAmount as [Sales Amount]
+      --,[TaxAmt]
+      --,[Freight]
+      --,[CarrierTrackingNumber]
+      --,[CustomerPONumber]
+      --,[OrderDate]
+      --,[DueDate]
+      --,[ShipDate]
+  FROM dbo.FactInternetSales
+  where left (OrderDateKey,4) >= YEAR(GETDATE())-2 -- ensures we always get data two years back from the current data (Customer request)
+  order by OrderDateKey asc;
